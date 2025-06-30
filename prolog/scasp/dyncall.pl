@@ -211,7 +211,18 @@ scasp_query_clauses(Query, Clauses) :-
 scasp_clause(Callees, source(ClauseRef, M:(Head:- Body))) :-
     member(PI, Callees),
     pi_head(PI, M:Head),
-    @(clause(Head, Body, ClauseRef), M).
+    @(clause(Head, Body0, ClauseRef), M),
+    unqualify_body(M, Body0, Body).
+
+%!  unqualify_body(+M, :Body0, -Body) is det.
+%
+%   Multifile clauses use the I_CONTEXT instruction, causing the body to
+%   be decompiled as Module:RawBody. s(CASP) does not deal with that.
+
+unqualify_body(M, M:Body0, Body) =>
+    Body = Body0.
+unqualify_body(_, Body0, Body) =>
+    Body = Body0.
 
 qualify(source(Ref, Clause), Q) =>
     Q = source(Ref, QClause),
