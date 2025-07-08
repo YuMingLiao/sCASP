@@ -37,16 +37,16 @@ releases(tapOn,level(0),T) :- happens(tapOn, T).
 % the maximum level of the vessel.
 
 trajectory(filling,T1,level(X2),T2) :-
-    T1 .<. T2,
-    X2 .=. X + T2 - T1,
+    T1 #< T2,
+    X2 #= X + T2 - T1,
     max_level(Max),
-    X2 .=<. Max,
+    X2 #=< Max,
     holdsAt(level(X),T1).
 trajectory(filling,T1,level(overlimit),T2) :-
-    T1 .<. T2,
-    X2 .=. X + T2 - T1,
+    T1 #< T2,
+    X2 #= X + T2 - T1,
     max_level(Max),
-    X2 .>. Max,
+    X2 #> Max,
     holdsAt(level(X),T1).
 
 % Now we have the Trajectory formula, which describes the continuous
@@ -56,8 +56,8 @@ trajectory(filling,T1,level(overlimit),T2) :-
 
 trajectory(spilling,T1,leak(X),T2) :-
     holdsAt(filling, T2),
-    T1.<.T2,
-    X .=. T2 - T1.
+    T1 #< T2,
+    X #= T2 - T1.
 
 % The next formulae ensures the Overflow event is triggered when it
 % should be.

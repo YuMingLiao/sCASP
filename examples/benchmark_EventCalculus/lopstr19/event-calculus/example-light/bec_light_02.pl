@@ -19,8 +19,8 @@ terminates(turn_off, light_on, T).
 
 % After a light is turned on, it will emit red for two seconds and
 % green after the first two seconds:
-trajectory(light_on, T1, light_red, T2) :- T2 .>=. T1, T2.<.T1 + 2.
-trajectory(light_on, T1, light_green, T2) :- T2 .>=. T1 + 2.
+trajectory(light_on, T1, light_red, T2) :- T2 #>= T1, T2 #< T1 + 2.
+trajectory(light_on, T1, light_green, T2) :- T2 #>= T1 + 2.
 
 :- holdsAt(light_red,T), holdsAt(light_green,T).
 
@@ -35,7 +35,7 @@ happens(turn_on, 2).
 %% Queries (with the expected result)
 %% Uncomment the querie you want to check...
 
-?- holdsAt(light_green,5). 
-% ?- holdsAt(light_on,3).    
+% ?- holdsAt(light_green,5). 
+?- holdsAt(light_on,3).    
 
  

@@ -19,8 +19,8 @@ terminates(turn_off, light_on, T).
 
 % After a light is turned on, it will emit red for six seconds and
 % green after the first four seconds:
-trajectory(light_on, T1, light_red, T2) :- T2 .>=. T1, T2.<.T1 + 6.
-trajectory(light_on, T1, light_green, T2) :- T2 .>=. T1 + 4.
+trajectory(light_on, T1, light_red, T2) :- T2  #>= T1, T2 #< T1 + 6.
+trajectory(light_on, T1, light_green, T2) :- T2 #>= T1 + 4.
 
 
 %% In this example we obtain answer becuase the overlap do not occurs
@@ -37,7 +37,7 @@ happens(turn_off,5).
 %% Queries (with the expected result)
 %% Uncomment the querie you want to check...
 
-?- holdsAt(light_red, 3).
-% ?- holdsAt(light_on,3).
+% ?- holdsAt(light_red, 3).
+ ?- holdsAt(light_on,3).
 
  

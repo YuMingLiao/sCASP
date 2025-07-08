@@ -19,8 +19,8 @@ terminates(turn_off, light_on, T).
 
 % After a light is turned on, it will emit red for six seconds and
 % green after the first four seconds:
-trajectory(light_on, T1, light_red, T2) :- T2 .>=. T1, T2.<.T1 + 6.
-trajectory(light_on, T1, light_green, T2) :- T2 .>=. T1 + 4.
+trajectory(light_on, T1, light_red, T2) :- T2 #>= T1, T2 #< T1 + 6.
+trajectory(light_on, T1, light_green, T2) :- T2 #>= T1 + 4.
 
 %% NOTE That this rule make the example inconsistent because the
 %% trajectory for light_red overlap the trajectory for light_green...
@@ -36,7 +36,7 @@ happens(turn_on, 2).
 %% Queries (with the expected result)
 %% Uncomment the querie you want to check...
 
-?- holdsAt(light_green,5).
-% ?- holdsAt(light_on,3).
+% ?- holdsAt(light_green,5).
+ ?- holdsAt(light_on,3).
 
  
