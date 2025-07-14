@@ -6,7 +6,7 @@ cancelled(P, Data) :-
      stream(P1, Data1), 
      incompt(Data, Data1).
 higher_prio(PHi, PLo) :- 
-     PHi .>. PLo.
+  PHi #> PLo.
 incompt(p(X), q(X)).
 incompt(q(X), p(X)).
 
